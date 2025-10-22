@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCalc 2025 - Premium Business Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --accent-color: #f59e0b;
+            --white: #ffffff;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-text span {
+            color: var(--text-dark);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 80px;
+            background: var(--gradient);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 Q500,80 1000,0 L1000,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100px;
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Calculators Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 100px;
+        }
+
+        .calculator-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .calculator-icon {
+            height: 140px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator-icon::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -30px;
+            right: -30px;
+        }
+
+        .calculator-content {
+            padding: 25px;
+        }
+
+        .calculator-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .calculator-description {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .calculator-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .calculator-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Calculator Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .calculator-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        .form-control {
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+            background: var(--light-bg);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-option input[type="radio"] {
+            accent-color: var(--primary-color);
+        }
+
+        .calculate-btn {
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            display: none;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .result.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Age Calculator Specific Styles */
+        .age-result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .age-result-item {
+            text-align: center;
+            padding: 15px 10px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .age-result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .age-result-label {
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .footer-links a::before {
+            content: '▸';
+            font-size: 12px;
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border: 4px solid rgba(16, 185, 129, 0.2);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                gap: 15px;
+                z-index: 99;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .calculators-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                max-width: 100%;
+            }
+
+            .age-result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .calculator-card {
+                margin: 0 10px;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <div class="logo-icon">S</div>
+                    <div class="logo-text">Smart<span>Calc</span></div>
+                </div>
+                <nav>
+                    <ul id="nav-menu">
+                        <li><a href="#calculators">Calculators</a></li>
+                        <li><a href="#about">Features</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <button class="mobile-menu-btn" id="mobile-menu-toggle">☰</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Premium Business Calculators for 2025</h1>
+                <p>Streamline your financial calculations with our modern, high-performance calculators. Fast, accurate, and completely private.</p>
+                <a href="#calculators" class="cta-button">Explore Calculators</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section id="calculators">
+        <div class="container">
+            <h2 class="section-title">Business Calculators</h2>
+            <div class="calculators-grid">
+                <!-- GST Calculator -->
+                <div class="calculator-card" data-calculator="gst">
+                    <div class="calculator-icon">%</div>
+                    <div class="calculator-content">
+                        <h3 class="calculator-title">GST Calculator</h3>
+                        <p class="calculator-description">Add or remove GST from any amount with our easy-to-use calculator.</p>
+                        <a href="#" class="calculator-btn">Calculate</a>
+                    </div>
+                </div>
+
+                <!-- EMI Calculator -->
+                <div class="calculator-card" data-calculator="emi">
+                    <div class="calculator-icon">₹</div>
+                    <div class="calculator-content">
+                        <h3 class="calculator-title">EMI Calculator</h3>
+                        <p class="calculator-description">Calculate your monthly loan installments with accurate results.</p>
+                        <a href="#" class="calculator-btn">Calculate</a>
+                    </div>
+                </div>
+
+                <!-- Interest Calculator -->
+                <div class="calculator-card" data-calculator="interest">
+                    <div class="calculator-icon">$</div>
+                    <div class="calculator-content">
+                        <h3 class="calculator-title">Interest Calculator</h3>
+                        <p class="calculator-description">Compute simple or compound interest for your investments.</p>
+                        <a href="#" class="calculator-btn">Calculate</a>
+                    </div>
+                </div>
+
+                <!-- Discount Calculator -->
+                <div class="calculator-card" data-calculator="discount">
+                    <div class="calculator-icon">%</div>
+                    <div class="calculator-content">
+                        <h3 class="calculator-title">Discount Calculator</h3>
+                        <p class="calculator-description">Calculate final price after applying discount percentages.</p>
+                        <a href="#" class="calculator-btn">Calculate</a>
+                    </div>
+                </div>
+
+                <!-- Profit Margin Calculator -->
+                <div class="calculator-card" data-calculator="profit">
+                    <div class="calculator-icon">📈</div>
+                    <div class="calculator-content">
+                        <h3 class="calculator-title">Profit Margin Calculator</h3>
+                        <p class="calculator-description">Calculate profit, cost price, or selling price with ease.</p>
+                        <a href="#" class="calculator-btn">Calculate</a>
+                    </div>
+                </div>
+
+                <!-- Percentage Calculator -->
+                <div class="calculator-card" data-calculator="percentage">
+                    <div class="calculator-icon">%</div>
+                    <div class="calculator-content">
+                        <h3 class="calculator-title">Percentage Calculator</h3>
+                        <p class="calculator-description">Calculate percentage of a number or percentage change.</p>
+                        <a href="#" class="calculator-btn">Calculate</a>
+                    </div>
+                </div>
+
+                <!-- Age Calculator -->
+                <div class="calculator-card" data-calculator="age">
+                    <div class="calculator-icon">🎂</div>
+                    <div class="calculator-content">
+                        <h3 class="calculator-title">Age Calculator</h3>
+                        <p class="calculator-description">Calculate your exact age in years, months, and days.</p>
+                        <a href="#" class="calculator-btn">Calculate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Modals -->
+    <!-- GST Calculator Modal -->
+    <div class="modal" id="gst-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">GST Calculator</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="calculator-form" id="gst-form">
+                    <div class="form-group">
+                        <label for="gst-amount">Amount</label>
+                        <input type="number" id="gst-amount" class="form-control" placeholder="Enter amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gst-rate">GST Rate (%)</label>
+                        <input type="number" id="gst-rate" class="form-control" placeholder="Enter GST rate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Calculation Type</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="add-gst" name="gst-type" value="add" checked>
+                                <label for="add-gst">Add GST</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="remove-gst" name="gst-type" value="remove">
+                                <label for="remove-gst">Remove GST</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+                <div class="result" id="gst-result">
+                    <div class="result-title">Result</div>
+                    <div class="result-value" id="gst-result-value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMI Calculator Modal -->
+    <div class="modal" id="emi-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">EMI Calculator</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="calculator-form" id="emi-form">
+                    <div class="form-group">
+                        <label for="emi-principal">Loan Amount (Principal)</label>
+                        <input type="number" id="emi-principal" class="form-control" placeholder="Enter loan amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emi-interest">Annual Interest Rate (%)</label>
+                        <input type="number" id="emi-interest" class="form-control" placeholder="Enter interest rate" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emi-tenure">Loan Tenure (in months)</label>
+                        <input type="number" id="emi-tenure" class="form-control" placeholder="Enter tenure in months" required>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+                <div class="result" id="emi-result">
+                    <div class="result-title">Monthly EMI</div>
+                    <div class="result-value" id="emi-result-value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interest Calculator Modal -->
+    <div class="modal" id="interest-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Interest Calculator</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="calculator-form" id="interest-form">
+                    <div class="form-group">
+                        <label for="interest-principal">Principal Amount</label>
+                        <input type="number" id="interest-principal" class="form-control" placeholder="Enter principal amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest-rate">Annual Interest Rate (%)</label>
+                        <input type="number" id="interest-rate" class="form-control" placeholder="Enter interest rate" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest-time">Time Period (in years)</label>
+                        <input type="number" id="interest-time" class="form-control" placeholder="Enter time period" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Interest Type</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="simple-interest" name="interest-type" value="simple" checked>
+                                <label for="simple-interest">Simple Interest</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="compound-interest" name="interest-type" value="compound">
+                                <label for="compound-interest">Compound Interest</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+                <div class="result" id="interest-result">
+                    <div class="result-title">Total Interest</div>
+                    <div class="result-value" id="interest-result-value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discount Calculator Modal -->
+    <div class="modal" id="discount-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Discount Calculator</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="calculator-form" id="discount-form">
+                    <div class="form-group">
+                        <label for="discount-original">Original Price</label>
+                        <input type="number" id="discount-original" class="form-control" placeholder="Enter original price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="discount-percent">Discount Percentage (%)</label>
+                        <input type="number" id="discount-percent" class="form-control" placeholder="Enter discount percentage" required>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+                <div class="result" id="discount-result">
+                    <div class="result-title">Discounted Price</div>
+                    <div class="result-value" id="discount-result-value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profit Margin Calculator Modal -->
+    <div class="modal" id="profit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Profit Margin Calculator</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="calculator-form" id="profit-form">
+                    <div class="form-group">
+                        <label for="profit-cost">Cost Price</label>
+                        <input type="number" id="profit-cost" class="form-control" placeholder="Enter cost price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profit-selling">Selling Price</label>
+                        <input type="number" id="profit-selling" class="form-control" placeholder="Enter selling price" required>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+                <div class="result" id="profit-result">
+                    <div class="result-title">Profit Margin</div>
+                    <div class="result-value" id="profit-result-value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Percentage Calculator Modal -->
+    <div class="modal" id="percentage-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Percentage Calculator</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="calculator-form" id="percentage-form">
+                    <div class="form-group">
+                        <label>Calculation Type</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="percentage-of" name="percentage-type" value="of" checked>
+                                <label for="percentage-of">X% of Y</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="percentage-change" name="percentage-type" value="change">
+                                <label for="percentage-change">Percentage Change</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="percentage-x">X Value</label>
+                        <input type="number" id="percentage-x" class="form-control" placeholder="Enter X value" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="percentage-y">Y Value</label>
+                        <input type="number" id="percentage-y" class="form-control" placeholder="Enter Y value" required>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+                <div class="result" id="percentage-result">
+                    <div class="result-title">Result</div>
+                    <div class="result-value" id="percentage-result-value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Age Calculator Modal -->
+    <div class="modal" id="age-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Age Calculator</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="calculator-form" id="age-form">
+                    <div class="form-group">
+                        <label for="birth-date">Date of Birth</label>
+                        <input type="date" id="birth-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="current-date">Current Date (Optional)</label>
+                        <input type="date" id="current-date" class="form-control">
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate Age</button>
+                </form>
+                <div class="result" id="age-result">
+                    <div class="result-title">Your Age</div>
+                    <div class="result-value" id="age-result-value"></div>
+                    <div class="age-result-grid" id="age-details">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SmartCalc 2025</h3>
+                    <p>Premium business calculators for accurate financial planning and analysis. Fast, reliable, and privacy-focused.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Calculators</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">GST Calculator</a></li>
+                        <li><a href="#">EMI Calculator</a></li>
+                        <li><a href="#">Interest Calculator</a></li>
+                        <li><a href="#">Discount Calculator</a></li>
+                        <li><a href="#">Profit Margin Calculator</a></li>
+                        <li><a href="#">Percentage Calculator</a></li>
+                        <li><a href="#">Age Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Privacy Policy</h3>
+                    <p>This website does not store any personal data. All calculations are processed locally for your privacy. © 2025 BusinessCalc.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SmartCalc. All rights reserved. | Premium Business Calculator Suite</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Calculator Card Click Handlers
+        const calculatorCards = document.querySelectorAll('.calculator-card');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.close-btn');
+
+        calculatorCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const calculatorType = card.getAttribute('data-calculator');
+                const modal = document.getElementById(`${calculatorType}-modal`);
+                modal.classList.add('active');
+            });
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = button.closest('.modal');
+                modal.classList.remove('active');
+            });
+        });
+
+        // Close modal when clicking outside
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Ripple Effect for Buttons
+        const calculateButtons = document.querySelectorAll('.calculate-btn');
+        
+        calculateButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Calculator Logic
+        // GST Calculator
+        document.getElementById('gst-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const amount = parseFloat(document.getElementById('gst-amount').value);
+            const rate = parseFloat(document.getElementById('gst-rate').value);
+            const type = document.querySelector('input[name="gst-type"]:checked').value;
+            
+            let result;
+            
+            if (type === 'add') {
+                result = amount + (amount * (rate / 100));
+                document.getElementById('gst-result-value').textContent = `₹${result.toFixed(2)}`;
+            } else {
+                result = amount / (1 + (rate / 100));
+                document.getElementById('gst-result-value').textContent = `₹${result.toFixed(2)}`;
+            }
+            
+            document.getElementById('gst-result').classList.add('active');
+        });
+
+        // EMI Calculator
+        document.getElementById('emi-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const principal = parseFloat(document.getElementById('emi-principal').value);
+            const annualRate = parseFloat(document.getElementById('emi-interest').value);
+            const months = parseInt(document.getElementById('emi-tenure').value);
+            
+            const monthlyRate = annualRate / 12 / 100;
+            const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+            
+            document.getElementById('emi-result-value').textContent = `₹${emi.toFixed(2)}`;
+            document.getElementById('emi-result').classList.add('active');
+        });
+
+        // Interest Calculator
+        document.getElementById('interest-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const principal = parseFloat(document.getElementById('interest-principal').value);
+            const rate = parseFloat(document.getElementById('interest-rate').value);
+            const time = parseFloat(document.getElementById('interest-time').value);
+            const type = document.querySelector('input[name="interest-type"]:checked').value;
+            
+            let result;
+            
+            if (type === 'simple') {
+                result = (principal * rate * time) / 100;
+            } else {
+                result = principal * (Math.pow(1 + (rate / 100), time) - 1);
+            }
+            
+            document.getElementById('interest-result-value').textContent = `₹${result.toFixed(2)}`;
+            document.getElementById('interest-result').classList.add('active');
+        });
+
+        // Discount Calculator
+        document.getElementById('discount-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const original = parseFloat(document.getElementById('discount-original').value);
+            const discount = parseFloat(document.getElementById('discount-percent').value);
+            
+            const result = original - (original * (discount / 100));
+            
+            document.getElementById('discount-result-value').textContent = `₹${result.toFixed(2)}`;
+            document.getElementById('discount-result').classList.add('active');
+        });
+
+        // Profit Margin Calculator
+        document.getElementById('profit-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const cost = parseFloat(document.getElementById('profit-cost').value);
+            const selling = parseFloat(document.getElementById('profit-selling').value);
+            
+            const profitMargin = ((selling - cost) / selling) * 100;
+            
+            document.getElementById('profit-result-value').textContent = `${profitMargin.toFixed(2)}%`;
+            document.getElementById('profit-result').classList.add('active');
+        });
+
+        // Percentage Calculator
+        document.getElementById('percentage-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const x = parseFloat(document.getElementById('percentage-x').value);
+            const y = parseFloat(document.getElementById('percentage-y').value);
+            const type = document.querySelector('input[name="percentage-type"]:checked').value;
+            
+            let result;
+            
+            if (type === 'of') {
+                result = (x / 100) * y;
+                document.getElementById('percentage-result-value').textContent = result.toFixed(2);
+            } else {
+                result = ((y - x) / x) * 100;
+                document.getElementById('percentage-result-value').textContent = `${result.toFixed(2)}%`;
+            }
+            
+            document.getElementById('percentage-result').classList.add('active');
+        });
+
+        // Age Calculator
+        document.getElementById('age-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const birthDate = new Date(document.getElementById('birth-date').value);
+            let currentDate = document.getElementById('current-date').value 
+                ? new Date(document.getElementById('current-date').value) 
+                : new Date();
+            
+            // Calculate age
+            let years = currentDate.getFullYear() - birthDate.getFullYear();
+            let months = currentDate.getMonth() - birthDate.getMonth();
+            let days = currentDate.getDate() - birthDate.getDate();
+            
+            // Adjust for negative days/months
+            if (days < 0) {
+                months--;
+                // Get days in previous month
+                const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            // Calculate total months and days
+            const totalMonths = years * 12 + months;
+            const totalDays = Math.floor((currentDate - birthDate) / (1000 * 60 * 60 * 24));
+            
+            // Update result display
+            document.getElementById('age-result-value').textContent = `${years} years, ${months} months, ${days} days`;
+            
+            // Update detailed age breakdown
+            const ageDetails = document.getElementById('age-details');
+            ageDetails.innerHTML = `
+                <div class="age-result-item">
+                    <div class="age-result-value">${years}</div>
+                    <div class="age-result-label">Years</div>
+                </div>
+                <div class="age-result-item">
+                    <div class="age-result-value">${totalMonths}</div>
+                    <div class="age-result-label">Months</div>
+                </div>
+                <div class="age-result-item">
+                    <div class="age-result-value">${totalDays}</div>
+                    <div class="age-result-label">Days</div>
+                </div>
+            `;
+            
+            document.getElementById('age-result').classList.add('active');
+        });
+
+        // Set current date as default for age calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            document.getElementById('current-date').value = formattedDate;
+        });
+    </script>
+</body>
+</html>
